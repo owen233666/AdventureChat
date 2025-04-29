@@ -2,8 +2,8 @@ package cn.owen233666.adventurechat.utils;
 
 import java.util.regex.*;
 
-public class convertHexColorCodes {
-    public static String convertColorCodes(String input) {
+public class convertColorCodes {
+    public static String convertHexColorCodes(String input) {
         // 正则表达式匹配 &# 后面跟着6个十六进制字符
         Pattern pattern = Pattern.compile("&#([A-Fa-f0-9]{6})");
         Matcher matcher = pattern.matcher(input);
@@ -25,5 +25,9 @@ public class convertHexColorCodes {
         matcher.appendTail(sb);
 
         return sb.toString();
+    }
+    public static String convertVanilliaColorCodes(String input){
+        Pattern pattern =  Pattern.compile("&([a-e])");
+        return input;
     }
 }
