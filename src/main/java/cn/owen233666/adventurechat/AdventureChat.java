@@ -29,7 +29,7 @@ public class AdventureChat {
         ServerPlayer player = event.getPlayer();
         String rawMessage = convertutils.convert(event.getRawText());
 
-        // 1. 构建自定义玩家名显示（无<Dev>前缀）
+        // 1. 构建自定义玩家名显示，未来可能删除
         MutableComponent playerName = Component.literal(player.getScoreboardName());
 
         // 2. 解析消息内容
