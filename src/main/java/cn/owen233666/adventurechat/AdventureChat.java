@@ -4,7 +4,6 @@ import cn.owen233666.adventurechat.utils.convertutils;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
@@ -29,10 +28,7 @@ public class AdventureChat {
         ServerPlayer player = event.getPlayer();
         String rawMessage = convertutils.convert(event.getRawText());
 
-        // 1. 构建自定义玩家名显示，未来可能删除
-        MutableComponent playerName = Component.literal(player.getScoreboardName());
-
-        // 2. 解析消息内容
+        // 1. 解析消息内容
         Component messageContent;
         try {
             messageContent = convertToMinecraft(
@@ -44,15 +40,8 @@ public class AdventureChat {
                     .withStyle(ChatFormatting.RED);
         }
 
-        // 3. 组合成最终消息
-        Component finalMessage = Component.empty()
-                .append(playerName)
-                .append(": ")
-                .append(messageContent);
-
-        // 4. 取消原版消息并发送自定义消息
-        event.setCanceled(true);
-        player.server.getPlayerList().broadcastSystemMessage(finalMessage, false);
+        // 2. 直接修改事件的消息内容
+        event.setMessage(messageContent);
     }
 
     private Component convertToMinecraft(net.kyori.adventure.text.Component component, HolderLookup.Provider registries) {
