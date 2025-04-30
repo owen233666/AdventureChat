@@ -58,4 +58,5 @@ public class convertutils {
         input = input.replace("&r","<reset>");
         return input;
     }
+
 }
