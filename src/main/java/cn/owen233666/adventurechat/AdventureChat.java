@@ -1,6 +1,7 @@
 package cn.owen233666.adventurechat;
 
 import cn.owen233666.adventurechat.utils.convertutils;
+import cn.owen233666.adventurechat.utils.matchBilibiliVideos;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
@@ -27,7 +28,7 @@ public class AdventureChat {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onServerChat(ServerChatEvent event) {
         ServerPlayer player = event.getPlayer();
-        String rawMessage = convertutils.convert(event.getRawText());
+        String rawMessage = matchBilibiliVideos.bilibilimatcher(convertutils.convert(event.getRawText()));
 
         // 1. 构建自定义玩家名显示，未来可能删除
         MutableComponent playerName = Component.literal(player.getScoreboardName());
