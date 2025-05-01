@@ -5,7 +5,6 @@ import cn.owen233666.adventurechat.utils.matchBilibiliVideos;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
@@ -15,6 +14,9 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.ServerChatEvent;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.minecraft.ChatFormatting;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Mod(AdventureChat.MODID)
 public class AdventureChat {
@@ -29,9 +31,16 @@ public class AdventureChat {
     public void onServerChat(ServerChatEvent event) {
         ServerPlayer player = event.getPlayer();
         String rawMessage = matchBilibiliVideos.bilibilimatcher(convertutils.convert(event.getRawText()));
-
-        // 1. 构建自定义玩家名显示，未来可能删除
-        MutableComponent playerName = Component.literal(player.getScoreboardName());
+        Component PlayerHover;
+        try{
+            PlayerHover = convertToMinecraft(
+                    MINI_MESSAGE.deserialize("<hover:show_text:'发送时间:"+ DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()) +"'>"+player.getScoreboardName()+"<reset>"),
+                    player.registryAccess()
+            );
+        }catch (Exception e){
+            PlayerHover = Component.literal("解析文字时发生错误错误！")
+                    .withStyle(ChatFormatting.RED);
+        }
 
         // 2. 解析消息内容
         Component messageContent;
@@ -41,13 +50,13 @@ public class AdventureChat {
                     player.registryAccess()
             );
         } catch (Exception e) {
-            messageContent = Component.literal(rawMessage)
+            messageContent = Component.literal("解析文字时发生错误错误！")
                     .withStyle(ChatFormatting.RED);
         }
 
         // 3. 组合成最终消息
         Component finalMessage = Component.empty()
-                .append(playerName)
+                .append(PlayerHover)
                 .append(": ")
                 .append(messageContent);
 
