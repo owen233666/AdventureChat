@@ -1,22 +1,12 @@
 package cn.owen233666.adventurechat;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-// An example config class. This is not required, but it's a good idea to have one to keep your config organized.
-// Demonstrates how to use Neo's config APIs
 @EventBusSubscriber(modid = AdventureChat.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
@@ -29,7 +19,7 @@ public class Config {
 
         HELP_STRING = BUILDER
                 .comment("An example string configuration")
-                .define("exampleString", "defaultValue");
+                .define("Instruction", "欢迎使用<gradient:>AdventureChat!以下是AdventureChat的大致使用方法:<newline>在目标内容之前输入\"<gradient:颜色1:颜色2>\"可以给目标内容加上渐变色，例如：<newline><gradient:#AABCDF:#1A6C5F>这是一段文字<reset>");
 
         BUILDER.pop();
         SPEC = BUILDER.build();
@@ -37,7 +27,7 @@ public class Config {
 
     // 新的注册方式
     public static void register(final ModContainer container) {
-        container.registerConfig(ModConfig.Type.COMMON, SPEC, "examplemod.toml");
+        container.registerConfig(ModConfig.Type.COMMON, SPEC, "AdventureChat.toml");
     }
 
     // 可选：监听配置变化事件

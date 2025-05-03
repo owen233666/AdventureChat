@@ -1,5 +1,6 @@
 package cn.owen233666.adventurechat;
 
+import cn.owen233666.adventurechat.commands.AModCommands;
 import cn.owen233666.adventurechat.utils.convertutils;
 import cn.owen233666.adventurechat.utils.matchBilibiliVideos;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -9,8 +10,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.ServerChatEvent;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.minecraft.ChatFormatting;
@@ -21,10 +24,21 @@ import java.time.format.DateTimeFormatter;
 @Mod(AdventureChat.MODID)
 public class AdventureChat {
     public static final String MODID = "adventurechat";
-    private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
+    public static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
 
     public AdventureChat(IEventBus modEventBus) {
-        NeoForge.EVENT_BUS.register(this);
+        // 注册配置
+        Config.register(ModLoadingContext.get().getActiveContainer());
+        // 注册事件监听器
+        modEventBus.addListener(Config::onConfigChanged);
+
+        // 在NeoForge总线上注册命令和聊天事件
+        NeoForge.EVENT_BUS.addListener(this::onRegisterCommands);
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, this::onServerChat);
+    }
+
+    private void onRegisterCommands(RegisterCommandsEvent event) {
+        AModCommands.register(event.getDispatcher());
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -38,7 +52,7 @@ public class AdventureChat {
                     player.registryAccess()
             );
         }catch (Exception e){
-            PlayerHover = Component.literal("解析文字时发生错误错误！")
+            PlayerHover = Component.literal("解析文字时发生错误！")
                     .withStyle(ChatFormatting.RED);
         }
 
@@ -50,7 +64,7 @@ public class AdventureChat {
                     player.registryAccess()
             );
         } catch (Exception e) {
-            messageContent = Component.literal("解析文字时发生错误错误！")
+            messageContent = Component.literal("解析文字时发生错误！")
                     .withStyle(ChatFormatting.RED);
         }
 
@@ -65,7 +79,7 @@ public class AdventureChat {
         player.server.getPlayerList().broadcastSystemMessage(finalMessage, false);
     }
 
-    private Component convertToMinecraft(net.kyori.adventure.text.Component component, HolderLookup.Provider registries) {
+    public Component convertToMinecraft(net.kyori.adventure.text.Component component, HolderLookup.Provider registries) {
         try {
             String json = GsonComponentSerializer.gson().serialize(component);
             return Component.Serializer.fromJson(json, registries);
