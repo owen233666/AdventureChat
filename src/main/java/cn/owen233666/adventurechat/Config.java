@@ -19,7 +19,7 @@ public class Config {
 
         HELP_STRING = BUILDER
                 .comment("An example string configuration")
-                .define("Instruction", "欢迎使用<gradient:>AdventureChat!以下是AdventureChat的大致使用方法:<newline>在目标内容之前输入\"<gradient:颜色1:颜色2>\"可以给目标内容加上渐变色，例如：<newline><gradient:#AABCDF:#1A6C5F>这是一段文字<reset>");
+                .define("Instruction", "欢迎使用<gradient:#6E60FF:#FF35F1:#FF322B>AdventureChat<reset>!以下是AdventureChat的大致使用方法:<newline>在目标内容之前输入\"<gradient:颜色1:颜色2>\"可以给目标内容加上渐变色，例如：<newline><gradient:#AABCDF:#1A6C5F>这是一段文字<reset>");
 
         BUILDER.pop();
         SPEC = BUILDER.build();
