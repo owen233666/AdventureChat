@@ -79,6 +79,16 @@ public class AdventureChat {
         player.server.getPlayerList().broadcastSystemMessage(finalMessage, false);
     }
 
+//    //聊天界面
+//    @SubscribeEvent
+//    public void onClientSetup(FMLClientSetupEvent event) {
+//        event.enqueueWork(() -> {
+//            // 替换默认聊天界面
+//            Minecraft.getInstance().setScreen(new ToggleButton(""));
+//        });
+//    }
+
+
     public Component convertToMinecraft(net.kyori.adventure.text.Component component, HolderLookup.Provider registries) {
         try {
             String json = GsonComponentSerializer.gson().serialize(component);
