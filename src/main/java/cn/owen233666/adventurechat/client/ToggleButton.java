@@ -20,8 +20,8 @@ public class ToggleButton extends ChatScreen {
     private int buttonX, buttonY;
     private final int buttonWidth = 128;
     private final int buttonHeight = 24;
-    private final Component buttonOnText = Component.literal("AdventureAPI解析已启用");
-    private final Component buttonOffText = Component.literal("AdventureAPI解析已关闭");
+    private final Component buttonOnText = Component.translatable("text.adventurechat.togglebutton.on");
+    private final Component buttonOffText = Component.translatable("text.adventurechat.togglebutton.off");
     private boolean isButtonOn = true;
 
     public ToggleButton(String initial) {
