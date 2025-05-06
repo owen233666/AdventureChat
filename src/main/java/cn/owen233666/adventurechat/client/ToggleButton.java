@@ -73,7 +73,7 @@ public class ToggleButton extends ChatScreen {
             // 切换按钮状态
             isButtonOn = !isButtonOn;
             // 发送数据包到服务器
-             Networking.sendToServer(new ClientAdvntrChatPacket(isButtonOn));
+            Networking.sendToServer(new ClientAdvntrChatPacket(isButtonOn));
             return true;
         }
         return super.mouseClicked(mouseX, mouseY, button);
