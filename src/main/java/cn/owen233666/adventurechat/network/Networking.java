@@ -10,13 +10,9 @@ public class Networking {
 
     @SubscribeEvent
     public static void register(final RegisterPayloadHandlersEvent event) {
-        // Sets the current network version
         final PayloadRegistrar registrar = event.registrar(VERSION);
-
-//        registrar.playToClient(ClientAdvntrChatPacket.TYPE, ClientAdvntrChatPacket.STREAM_CODEC, ClientAdvntrChatPacket::handleOnClient);
         registrar.playToServer(ClientAdvntrChatPacket.TYPE, ClientAdvntrChatPacket.STREAM_CODEC, ClientAdvntrChatPacket::handleOnServer);
     }
-
 
     public static void sendToServer(ClientAdvntrChatPacket packet) {
         Minecraft.getInstance().getConnection().send(packet);

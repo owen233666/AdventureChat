@@ -1,5 +1,6 @@
 package cn.owen233666.adventurechat;
 
+import cn.owen233666.adventurechat.client.ToggleButton;
 import cn.owen233666.adventurechat.commands.CommandRegister;
 import cn.owen233666.adventurechat.network.Networking;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -15,7 +16,6 @@ import net.neoforged.neoforge.common.NeoForge;
 public class AdventureChat {
     public static final String MODID = "adventurechat";
     public static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
-
     public AdventureChat(IEventBus modEventBus, ModContainer modContainer) {
         // 注册配置
         Config.register(ModLoadingContext.get().getActiveContainer());

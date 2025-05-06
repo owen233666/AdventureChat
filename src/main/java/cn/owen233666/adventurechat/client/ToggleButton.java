@@ -24,7 +24,7 @@ public class ToggleButton extends ChatScreen {
     private final int buttonHeight = 24;
     private final Component buttonOnText = Component.translatable("text.adventurechat.togglebutton.on");
     private final Component buttonOffText = Component.translatable("text.adventurechat.togglebutton.off");
-    private boolean isButtonOn = true;
+    public static boolean isButtonOn = true;
 
     public ToggleButton(String initial) {
         super(initial);
@@ -43,7 +43,6 @@ public class ToggleButton extends ChatScreen {
 
         // 根据状态选择贴图
         ResourceLocation currentTexture = isButtonOn ? BUTTON_ON_TEXTURE : BUTTON_OFF_TEXTURE;
-
         // 渲染当前状态的贴图
         guiGraphics.blit(
                 currentTexture,
@@ -52,7 +51,6 @@ public class ToggleButton extends ChatScreen {
                 buttonWidth, buttonHeight,
                 buttonWidth, buttonHeight
         );
-
         String TextBuffer;
         if(isButtonOn){
             TextBuffer = buttonOnText.getString();
@@ -72,14 +70,10 @@ public class ToggleButton extends ChatScreen {
         if (button == 0 &&
                 mouseX >= buttonX && mouseX <= buttonX + buttonWidth &&
                 mouseY >= buttonY && mouseY <= buttonY + buttonHeight) {
-
             // 切换按钮状态
             isButtonOn = !isButtonOn;
-
-
             // 发送数据包到服务器
              Networking.sendToServer(new ClientAdvntrChatPacket(isButtonOn));
-
             return true;
         }
         return super.mouseClicked(mouseX, mouseY, button);

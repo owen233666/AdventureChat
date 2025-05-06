@@ -22,16 +22,13 @@ public record ClientAdvntrChatPacket(Boolean isAdvntrapiOn) implements CustomPac
     public @NotNull Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static void handleOnClient(final ClientAdvntrChatPacket data, final IPayloadContext context) {
-
-    }
+//    UNUSED
+//    public static void handleOnClient(final ClientAdvntrChatPacket data, final IPayloadContext context) {
+//
+//    }
 
     public static void handleOnServer(final ClientAdvntrChatPacket data, final IPayloadContext context) {
-        // 服务器端处理逻辑
         context.enqueueWork(() -> {
-            // 获取玩家
-            ServerPlayer player = (ServerPlayer) context.player();
-
             // 更新 isAdvntrAPIOn 的值
             ServerChatFormatter.isAdvntrAPIOn = data.isAdvntrapiOn();
 
