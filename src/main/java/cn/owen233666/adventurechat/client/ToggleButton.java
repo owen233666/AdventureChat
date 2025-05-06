@@ -1,6 +1,8 @@
 package cn.owen233666.adventurechat.client;
 
 import cn.owen233666.adventurechat.AdventureChat;
+import cn.owen233666.adventurechat.network.ClientAdvntrChatPacket;
+import cn.owen233666.adventurechat.network.Networking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.ChatScreen;
@@ -74,11 +76,9 @@ public class ToggleButton extends ChatScreen {
             // 切换按钮状态
             isButtonOn = !isButtonOn;
 
-            if(isButtonOn) {
-//                this.handleChatInput("/neotest on", true);
-            } else {
-//                this.handleChatInput("/neotest off", true);
-            }
+
+            // 发送数据包到服务器
+             Networking.sendToServer(new ClientAdvntrChatPacket(isButtonOn));
 
             return true;
         }
