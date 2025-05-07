@@ -24,7 +24,10 @@ public class CommandBuilder {
                             // 当输入/adventurechat help时，显示帮助信息
                             sendHelpMessage(context.getSource());
                             return 1;
-                        }));
+                        }))
+                .then(Commands.literal("previewitem")
+                        .executes(new PreviewItemCommand())
+                );
     }
 
     // 发送帮助信息的辅助方法

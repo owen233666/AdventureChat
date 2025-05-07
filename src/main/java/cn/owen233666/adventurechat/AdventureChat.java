@@ -1,8 +1,8 @@
 package cn.owen233666.adventurechat;
 
-import cn.owen233666.adventurechat.client.ToggleButton;
 import cn.owen233666.adventurechat.commands.CommandRegister;
 import cn.owen233666.adventurechat.network.Networking;
+import cn.owen233666.adventurechat.utils.show.ItemShow;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.EventPriority;
@@ -25,6 +25,7 @@ public class AdventureChat {
         // 在NeoForge总线上注册命令和聊天事件
         NeoForge.EVENT_BUS.addListener(CommandRegister::onRegisterCommands);
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ServerChatFormatter::onServerChat);
+        NeoForge.EVENT_BUS.addListener(ItemShow::onServerChat);
     }
 
     public static ResourceLocation id(String path){

@@ -2,11 +2,13 @@ package cn.owen233666.adventurechat;
 
 import cn.owen233666.adventurechat.utils.convertutils;
 import cn.owen233666.adventurechat.utils.matchBilibiliVideos;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.ServerChatEvent;
@@ -21,6 +23,7 @@ public class ServerChatFormatter {
         ServerPlayer player = event.getPlayer();
         String rawMessage = event.getRawText();
         Component PlayerHover;
+
         try{
             PlayerHover = convertToMinecraft(
                     AdventureChat.MINI_MESSAGE.deserialize("<hover:show_text:'发送时间:"+ DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()) +"'>"+player.getScoreboardName()+"<reset>"),
@@ -32,6 +35,7 @@ public class ServerChatFormatter {
         }
         if(isAdvntrAPIOn){
             String tempMessage = matchBilibiliVideos.bilibilimatcher(convertutils.convert(rawMessage));
+            tempMessage = processItemShow(player, tempMessage);
             // 2. 解析消息内容
             Component messageContent;
             try {
@@ -53,6 +57,26 @@ public class ServerChatFormatter {
             event.setCanceled(true);
             player.server.getPlayerList().broadcastSystemMessage(playerMessage, false);
         }
+    }
+    private static String processItemShow(ServerPlayer player, String message) {
+        if (!message.contains("%i")) return message;
+
+        ItemStack heldItem = player.getMainHandItem();
+        if (heldItem.isEmpty()) {
+            return message.replace("%i", "[空手]");
+        }
+
+        Key itemKey = Key.key(
+                heldItem.getItem().builtInRegistryHolder().key().location().getNamespace(),
+                heldItem.getItem().builtInRegistryHolder().key().location().getPath()
+        );
+
+        String itemDisplay = "<hover:show_item:'" + itemKey + "'," + heldItem.getCount() + ">" +
+                "<click:run_command:'/adventurechat previewitem'>" +
+                heldItem.getHoverName().getString() +
+                "</click></hover>";
+
+        return message.replace("%i", itemDisplay);
     }
 
     public static Component convertToMinecraft(net.kyori.adventure.text.Component component, HolderLookup.Provider registries) {
