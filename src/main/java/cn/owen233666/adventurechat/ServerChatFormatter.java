@@ -100,8 +100,7 @@ public class ServerChatFormatter {
         if (!m1.find() && !m2.find()) return message;
         UUID uuid = UUID.randomUUID();
         Inventory inventory = player.getInventory();
-        InventoryData inventoryData = new InventoryData();
-        inventoryData.setInventory(player, inventory);
+        InventoryData inventoryData = new InventoryData().setInventory(player, inventory);
         //写入缓存
         InventoryShowCache.cache.put(uuid, inventoryData);
 

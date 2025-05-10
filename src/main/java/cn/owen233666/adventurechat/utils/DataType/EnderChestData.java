@@ -3,21 +3,20 @@ package cn.owen233666.adventurechat.utils.DataType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 
-public class InventoryData {
+public class EnderChestData {
     private Player player;
-    private Inventory inventory;
-
-    public InventoryData setInventory(Player player, Inventory inventory) {
+    private Inventory enderChest;
+    public EnderChestData setEnderChest(Player player, Inventory enderChest) {
         this.player = player;
-        this.inventory = inventory;
+        this.enderChest = enderChest;
         return this;
-    }
-
-    public Inventory getInventory() {
-        return inventory;
     }
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Inventory getEnderChest() {
+        return enderChest;
     }
 }
