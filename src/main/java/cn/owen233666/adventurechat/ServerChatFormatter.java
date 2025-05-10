@@ -1,14 +1,13 @@
 package cn.owen233666.adventurechat;
 
 import cn.owen233666.adventurechat.utils.*;
-import net.kyori.adventure.key.Key;
+import cn.owen233666.adventurechat.utils.Cache.ItemShowCache;
+import cn.owen233666.adventurechat.utils.DataType.ItemData;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -17,7 +16,6 @@ import net.neoforged.neoforge.event.ServerChatEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 public class ServerChatFormatter {
     public static boolean isAdvntrAPIOn = true;
@@ -72,8 +70,9 @@ public class ServerChatFormatter {
 //        if (heldItem.isEmpty()) {
 //            return message.replace("%i", "[空手]");
 //        }
+        String name = heldItem.getItem().getDefaultInstance().getHoverName().getString();
 
-        String itemDisplay = "[<click:run_command:'/adventurechat previewitem "+ uuid +"'>" +heldItem.getItem().getDefaultInstance().getHoverName()+ "<reset>]";
+        String itemDisplay = "[<click:run_command:'/adventurechat previewitem "+ uuid +"'>" +"<lang:" + name+ ">" + "<reset>]";
 
         return message.replace("%i", itemDisplay);
     }

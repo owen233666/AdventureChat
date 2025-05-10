@@ -1,4 +1,4 @@
-package cn.owen233666.adventurechat.utils;
+package cn.owen233666.adventurechat.utils.DataType;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
