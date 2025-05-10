@@ -1,4 +1,7 @@
 {
   "text.adventurechat.togglebutton.on": "AdventureAPI解析已开启",
-  "text.adventurechat.togglebutton.off": "AdventureAPI解析已关闭"
+  "text.adventurechat.togglebutton.off": "AdventureAPI解析已关闭",
+  "title.playersinv": "的背包",
+  "title.playersitem": "的物品",
+  "command.fail.onlyplayer": "只有玩家才能执行此命令！"
 }

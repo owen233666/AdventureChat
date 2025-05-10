@@ -27,10 +27,10 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 public class ItemShowExecutor {
-    public static int execute(CommandSourceStack source, String data) throws ExecutionException {
+    public static int execute(CommandSourceStack source, String uuid) throws ExecutionException {
         if (source.isPlayer() && !(source.getPlayer() instanceof FakePlayer)) {
             ServerPlayer player = source.getPlayer();
-            ItemData itemData = ItemShowCache.cache.get(UUID.fromString(data));
+            ItemData itemData = ItemShowCache.cache.get(UUID.fromString(uuid));
             ItemStack itemStack = itemData.getItem();
 
             player.openMenu(new MenuProvider() {
@@ -38,7 +38,7 @@ public class ItemShowExecutor {
                 public @NotNull Component getDisplayName() {
                     return Component.empty()
                             .append(itemData.getPlayer().getDisplayName())
-                            .append("的物品");
+                            .append(Component.translatable("title.playersitem"));
                 }
 
                 @Override
@@ -92,7 +92,7 @@ public class ItemShowExecutor {
             return Command.SINGLE_SUCCESS;
         }
 
-        source.sendFailure(Component.literal("只有真实玩家才能执行此命令"));
+        source.sendFailure(Component.translatable("command.fail.onlyplayer"));
         return 0;
     }
 }

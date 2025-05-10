@@ -1,4 +1,7 @@
 {
   "text.adventurechat.togglebutton.on": "AdventureAPI ON",
-  "text.adventurechat.togglebutton.off": "AdventureAPI OFF"
+  "text.adventurechat.togglebutton.off": "AdventureAPI OFF",
+  "title.playersinv": "'s Inventory'",
+  "title.playersitem": "'s Item",
+  "command.fail.onlyplayer": "Only player can execute this command!"
 }

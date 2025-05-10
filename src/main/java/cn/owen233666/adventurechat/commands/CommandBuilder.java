@@ -3,6 +3,7 @@ package cn.owen233666.adventurechat.commands;
 import cn.owen233666.adventurechat.AdventureChat;
 import cn.owen233666.adventurechat.Config;
 import cn.owen233666.adventurechat.client.ToggleButton;
+import cn.owen233666.adventurechat.utils.CommandExecutor.InventoryShowExecutor;
 import cn.owen233666.adventurechat.utils.CommandExecutor.ItemShowExecutor;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -30,12 +31,12 @@ public class CommandBuilder {
                             return 1;
                         }))
                 .then(Commands.literal("previewitem")
-                        .then(Commands.argument("data", StringArgumentType.greedyString())
+                        .then(Commands.argument("uuid", StringArgumentType.greedyString())
                                 .executes(context -> {
                                     try {
                                         return ItemShowExecutor.execute(
                                                 context.getSource(),
-                                                StringArgumentType.getString(context, "data")
+                                                StringArgumentType.getString(context, "uuid")
                                         );
                                     } catch (ExecutionException e) {
                                         throw new RuntimeException(e);
@@ -43,8 +44,34 @@ public class CommandBuilder {
                                 })
                         )
                 )
-                .then(Commands.literal("previewinv"))
-                .then(Commands.literal("previewenderchest"));
+                .then(Commands.literal("previewinv")
+                        .then(Commands.argument("uuid", StringArgumentType.greedyString())
+                                .executes(context -> {
+                                    try {
+                                        return InventoryShowExecutor.execute(
+                                                context.getSource(),
+                                                StringArgumentType.getString(context, "uuid")
+                                        );
+                                    } catch (ExecutionException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                })
+                        )
+                );
+//                .then(Commands.literal("previewenderchest")
+//                        .then(Commands.argument("uuid", StringArgumentType.greedyString())
+//                                .executes(context -> {
+//                                    try {
+//                                        return InventoryShowExecutor.execute(
+//                                                context.getSource(),
+//                                                StringArgumentType.getString(context, "uuid")
+//                                                );
+//                                        } catch (ExecutionException e) {
+//                                            throw new RuntimeException(e);
+//                                    }
+//                                })
+//                        )
+//                );
     }
     private static void sendHelpMessage(CommandSourceStack source) {
         String helpMessage = Config.HELP_STRING.get();
