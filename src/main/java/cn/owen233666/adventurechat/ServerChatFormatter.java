@@ -32,11 +32,11 @@ public class ServerChatFormatter {
 
         try{
             PlayerHover = convertToMinecraft(
-                    AdventureChat.MINI_MESSAGE.deserialize("<hover:show_text:'发送时间:"+ DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()) +"'>"+player.getScoreboardName()+"<reset>"),
+                    AdventureChat.MINI_MESSAGE.deserialize("<hover:show_text:'<lang:hover.text.sendtime>"+ DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()) +"'>"+player.getScoreboardName()+"<reset>"),
                     player.registryAccess()
             );
         }catch (Exception e){
-            PlayerHover = Component.literal("解析文字时发生错误！")
+            PlayerHover = Component.translatable("message.adventureapi.failedtoanalyze")
                     .withStyle(ChatFormatting.RED);
         }
 
@@ -54,7 +54,7 @@ public class ServerChatFormatter {
                         player.registryAccess()
                 );
             } catch (Exception e) {
-                messageContent = Component.literal("解析文字时发生错误！")
+                messageContent = Component.literal("message.adventureapi.failedtoanalyze")
                         .withStyle(ChatFormatting.RED);
             }
             // 3. 组合成最终消息

@@ -1,11 +1,13 @@
 {
   "text.adventurechat.togglebutton.on": "AdventureAPI ON",
   "text.adventurechat.togglebutton.off": "AdventureAPI OFF",
-  "title.playersinv": "'s Inventory'",
+  "title.playersinv": "'s Inventory",
   "title.playersitem": "'s Item",
   "command.fail.onlyplayer": "Only player can execute this command!",
   "hover.show.backpack": "'s backpack",
   "hover.showinv.playersrmorslotisempty": "'s armor slot is empty!",
   "placeholderitem.empty": "Empty!",
-  "placeholderitem.emptyoffhand": "'s off hand is empty!"
+  "placeholderitem.emptyoffhand": "'s off hand is empty!",
+  "hover.text.sendtime": "Time: ",
+  "message.adventureapi.failedtoanalyze": "Error while anaylzing text!"
 }

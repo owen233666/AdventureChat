@@ -7,5 +7,7 @@
   "hover.show.backpack": "的背包",
   "hover.showinv.playersrmorslotisempty": "的盔甲槽是空的！",
   "placeholderitem.empty": "空",
-  "placeholderitem.emptyoffhand": "的副手是空的！"
+  "placeholderitem.emptyoffhand": "的副手是空的！",
+  "hover.text.sendtime": "发送时间：",
+  "message.adventureapi.failedtoanalyze": "解析文字时发生错误！"
 }
