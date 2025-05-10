@@ -3,12 +3,31 @@ package cn.owen233666.adventurechat.commands;
 import cn.owen233666.adventurechat.AdventureChat;
 import cn.owen233666.adventurechat.Config;
 import cn.owen233666.adventurechat.client.ToggleButton;
+import cn.owen233666.adventurechat.utils.ItemData;
+import cn.owen233666.adventurechat.utils.ItemShowCache;
+import com.google.common.cache.Cache;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.util.FakePlayer;
+
+import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 public class CommandBuilder {
 
@@ -26,7 +45,18 @@ public class CommandBuilder {
                             return 1;
                         }))
                 .then(Commands.literal("previewitem")
-                        .executes(new PreviewItemCommand())
+                        .then(Commands.argument("data", StringArgumentType.greedyString())
+                                .executes(context -> {
+                                    try {
+                                        return execute(
+                                                context.getSource(),
+                                                StringArgumentType.getString(context, "data")
+                                        );
+                                    } catch (ExecutionException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                })
+                        )
                 );
     }
 
@@ -49,4 +79,36 @@ public class CommandBuilder {
                     () -> Component.literal("消息解析错误: " + e.getMessage()).withStyle(ChatFormatting.RED), false);
         }
     }
+
+    private static int execute(CommandSourceStack source, String data) throws ExecutionException {
+        if (source.isPlayer() && !(source.getPlayer() instanceof FakePlayer)) {
+            // 在这里处理你的命令逻辑
+            // data参数包含用户输入的所有内容
+            ServerPlayer player = source.getPlayer();
+            ItemData itemData = ItemShowCache.cache.get(UUID.fromString(data));
+            if(itemData == null){
+                return Command.SINGLE_SUCCESS;
+            }
+            Player itemOwner = itemData.getPlayer();
+            ItemStack itemStack = itemData.getItem();
+            SimpleContainer container = new SimpleContainer(27);
+            container.addItem(itemStack.copy());
+            AbstractContainerMenu ItemPreviewMenu = new ChestMenu(MenuType.GENERIC_9x3, 0, player.getInventory(), container, 3){
+                @Override
+                public boolean stillValid(Player player){
+                    return true;
+                }
+                @Override
+                public ItemStack quickMoveStack(Player player, int index){
+                    return ItemStack.EMPTY;
+                }
+            };
+            player.openMenu((MenuProvider) ItemPreviewMenu);
+            return Command.SINGLE_SUCCESS;
+        }
+
+        source.sendFailure(Component.literal("只有真实玩家才能执行此命令"));
+        return 0;
+    }
+
 }

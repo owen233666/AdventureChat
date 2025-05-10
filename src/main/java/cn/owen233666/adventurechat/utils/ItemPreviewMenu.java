@@ -10,38 +10,19 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 
+import java.awt.*;
+
 public class ItemPreviewMenu extends AbstractContainerMenu {
     private final ItemStack displayItem;
 
-    public ItemPreviewMenu(int id, Inventory playerInv, ItemStack displayItem) {
+    public ItemPreviewMenu(int id, Inventory playerInv, Component Title, ItemStack displayItem) {
         super(MenuType.GENERIC_9x3, id);
         this.displayItem = displayItem.copy();
 
-        // 如果是潜影盒，显示内容
-        if (displayItem.getItem() instanceof BlockItem blockItem &&
-                blockItem.getBlock() instanceof ShulkerBoxBlock) {
-
-            // 创建3x3容器显示潜影盒内容
-            for (int i = 0; i < 3; ++i) {
-                for (int j = 0; j < 3; ++j) {
-                    int slot = j + i * 3;
-                    ItemStack content = getShulkerContent(displayItem, slot);
-                    this.addSlot(new DisplayOnlySlot(content, slot, 62 + j * 18, 18 + i * 18));
-                }
-            }
-        } else {
-            // 普通物品居中显示
-            this.addSlot(new DisplayOnlySlot(displayItem, 0, 80, 36));
-        }
+        this.addSlot(new DisplayOnlySlot(displayItem, 0, 80, 36));
 
         // 玩家背包
         addPlayerInventory(playerInv);
-    }
-
-    private ItemStack getShulkerContent(ItemStack shulkerBox, int slot) {
-        // 获取潜影盒内容实现
-        // 这里需要根据NMS实现获取潜影盒内容
-        return ItemStack.EMPTY; // 实际实现应返回对应槽位的物品
     }
 
     private void addPlayerInventory(Inventory playerInv) {

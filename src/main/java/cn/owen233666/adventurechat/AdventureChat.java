@@ -25,7 +25,7 @@ public class AdventureChat {
         // 在NeoForge总线上注册命令和聊天事件
         NeoForge.EVENT_BUS.addListener(CommandRegister::onRegisterCommands);
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ServerChatFormatter::onServerChat);
-        NeoForge.EVENT_BUS.addListener(ItemShow::onServerChat);
+//        NeoForge.EVENT_BUS.addListener(ItemShow::onServerChat);
     }
 
     public static ResourceLocation id(String path){

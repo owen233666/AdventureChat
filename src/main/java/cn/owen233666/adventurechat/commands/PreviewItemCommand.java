@@ -1,5 +1,7 @@
 package cn.owen233666.adventurechat.commands;
 
+import cn.owen233666.adventurechat.ServerChatFormatter;
+import cn.owen233666.adventurechat.utils.ItemPreviewMenu;
 import cn.owen233666.adventurechat.utils.show.ItemShow;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
@@ -11,7 +13,7 @@ public class PreviewItemCommand implements Command<CommandSourceStack> {
     public int run(CommandContext<CommandSourceStack> context) {
         ServerPlayer player = context.getSource().getPlayer();
         if (player != null) {
-            ItemShow.openPreviewMenu(player, player.getMainHandItem());
+//            ServerChatFormatter.openPreviewMenu(player, player.getMainHandItem());
         }
         return 1;
     }

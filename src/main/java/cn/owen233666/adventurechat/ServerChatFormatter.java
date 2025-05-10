@@ -1,13 +1,14 @@
 package cn.owen233666.adventurechat;
 
-import cn.owen233666.adventurechat.utils.convertutils;
-import cn.owen233666.adventurechat.utils.matchBilibiliVideos;
+import cn.owen233666.adventurechat.utils.*;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -15,6 +16,8 @@ import net.neoforged.neoforge.event.ServerChatEvent;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 public class ServerChatFormatter {
     public static boolean isAdvntrAPIOn = true;
@@ -60,21 +63,17 @@ public class ServerChatFormatter {
     }
     private static String processItemShow(ServerPlayer player, String message) {
         if (!message.contains("%i")) return message;
-
+        UUID uuid = UUID.randomUUID();
+        ItemData itemData = new ItemData().setItem(player.getMainHandItem()).setPlayer(player);
         ItemStack heldItem = player.getMainHandItem();
-        if (heldItem.isEmpty()) {
-            return message.replace("%i", "[空手]");
-        }
+        //写入缓存
+        ItemShowCache.cache.put(uuid, itemData);
+//
+//        if (heldItem.isEmpty()) {
+//            return message.replace("%i", "[空手]");
+//        }
 
-        Key itemKey = Key.key(
-                heldItem.getItem().builtInRegistryHolder().key().location().getNamespace(),
-                heldItem.getItem().builtInRegistryHolder().key().location().getPath()
-        );
-
-        String itemDisplay = "<hover:show_item:'" + itemKey + "'," + heldItem.getCount() + ">" +
-                "<click:run_command:'/adventurechat previewitem'>" +
-                heldItem.getHoverName().getString() +
-                "</click></hover>";
+        String itemDisplay = "[<click:run_command:'/adventurechat previewitem "+ uuid +"'>" +heldItem.getItem().getDefaultInstance().getDisplayName()+ "<reset>]";
 
         return message.replace("%i", itemDisplay);
     }
