@@ -1,13 +1,16 @@
 package cn.owen233666.adventurechat;
 
 import cn.owen233666.adventurechat.utils.*;
+import cn.owen233666.adventurechat.utils.Cache.InventoryShowCache;
 import cn.owen233666.adventurechat.utils.Cache.ItemShowCache;
+import cn.owen233666.adventurechat.utils.DataType.InventoryData;
 import cn.owen233666.adventurechat.utils.DataType.ItemData;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -16,6 +19,8 @@ import net.neoforged.neoforge.event.ServerChatEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ServerChatFormatter {
     public static boolean isAdvntrAPIOn = true;
@@ -34,9 +39,13 @@ public class ServerChatFormatter {
             PlayerHover = Component.literal("解析文字时发生错误！")
                     .withStyle(ChatFormatting.RED);
         }
+
+
+
         if(isAdvntrAPIOn){
             String tempMessage = matchBilibiliVideos.bilibilimatcher(convertutils.convert(rawMessage));
             tempMessage = processItemShow(player, tempMessage);
+            tempMessage = processInvtoryShow(player, tempMessage);
             // 2. 解析消息内容
             Component messageContent;
             try {
@@ -59,23 +68,52 @@ public class ServerChatFormatter {
             player.server.getPlayerList().broadcastSystemMessage(playerMessage, false);
         }
     }
+
+
+
+
     private static String processItemShow(ServerPlayer player, String message) {
-        if (!message.contains("%i")) return message;
+        Pattern p = Pattern.compile("%i(?!nv)");
+        Matcher matcher = p.matcher(message);
+        if (!matcher.find()) return message;
         UUID uuid = UUID.randomUUID();
         ItemData itemData = new ItemData().setItem(player.getMainHandItem()).setPlayer(player);
         ItemStack heldItem = player.getMainHandItem();
         //写入缓存
         ItemShowCache.cache.put(uuid, itemData);
-//
-//        if (heldItem.isEmpty()) {
-//            return message.replace("%i", "[空手]");
-//        }
+
         String name = heldItem.getItem().getDefaultInstance().getHoverName().getString();
 
         String itemDisplay = "[<click:run_command:'/adventurechat previewitem "+ uuid +"'>" +"<lang:" + name+ ">" + "<reset>]";
 
-        return message.replace("%i", itemDisplay);
+        String processed = p.matcher(message).replaceAll(itemDisplay);
+        return processed;
     }
+
+
+
+    private static String processInvtoryShow(ServerPlayer player, String message) {
+        Pattern p1 = Pattern.compile("%inv");
+        Pattern p2 = Pattern.compile("\\[inv\\]");
+        Matcher m1 = p1.matcher(message);
+        Matcher m2 = p2.matcher(message);
+        if (!m1.find() && !m2.find()) return message;
+        UUID uuid = UUID.randomUUID();
+        Inventory inventory = player.getInventory();
+        InventoryData inventoryData = new InventoryData();
+        inventoryData.setInventory(player, inventory);
+        //写入缓存
+        InventoryShowCache.cache.put(uuid, inventoryData);
+
+        String itemDisplay = "<aqua>[<click:run_command:'/adventurechat previewinventory "+ uuid +"'>" + player.getScoreboardName() + "<lang:hover.show.backpack>" + "]<reset>";
+
+        String processed;
+        processed = p1.matcher(message).replaceAll(itemDisplay);
+        processed = p2.matcher(processed).replaceAll(itemDisplay);
+        return processed;
+    }
+
+
 
     public static Component convertToMinecraft(net.kyori.adventure.text.Component component, HolderLookup.Provider registries) {
         try {

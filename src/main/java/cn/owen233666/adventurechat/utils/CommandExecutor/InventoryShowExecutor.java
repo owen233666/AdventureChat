@@ -5,6 +5,7 @@ import cn.owen233666.adventurechat.utils.DataType.InventoryData;
 import cn.owen233666.adventurechat.utils.LockedSlot;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.Command;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -19,11 +20,13 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.component.ResolvableProfile;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
@@ -64,14 +67,42 @@ public class InventoryShowExecutor {
                         if(i == 36){
                             container.setItem(i, glassPane.copy());
                         }
+                        //盔甲槽
                         if(i >= 37 && i <= 40){
-                            container.setItem(i, inventory.getArmor(i-1).copy());
+                            if(inventory.getArmor(i-37).isEmpty()){
+                                ItemStack empty = new ItemStack(Items.BARRIER);
+                                List<Component> lore = List.of(
+                                        Component.literal(inventoryData.getPlayer().getScoreboardName())
+                                                .append(Component.translatable("hover.showinv.playersrmorslotisempty")).withStyle(ChatFormatting.GOLD)
+                                );
+                                ItemLore itemlore = new ItemLore(lore);
+                                empty.set(DataComponents.CUSTOM_NAME, Component.translatable("placeholderitem.empty").withStyle(ChatFormatting.RED));
+                                empty.set(DataComponents.LORE, itemlore);
+                                container.setItem(i, empty.copy());
+                            }
+                            else{
+                                container.setItem(i, inventory.getArmor(i-37).copy());
+                            }
                         }
                         if(i == 41 || i == 42){
                             container.setItem(i, glassPane.copy());
                         }
+                        //副手槽
                         if(i == 43){
-                            container.setItem(i, inventory.getItem(40).copy());
+                            if(inventory.getItem(40).isEmpty()){
+                                ItemStack empty = new ItemStack(Items.BARRIER);
+                                List<Component> lore = List.of(
+                                        Component.literal(inventoryData.getPlayer().getScoreboardName())
+                                                .append(Component.translatable("placeholderitem.emptyoffhand")).withStyle(ChatFormatting.GOLD)
+                                );
+                                ItemLore itemlore = new ItemLore(lore);
+                                empty.set(DataComponents.CUSTOM_NAME, Component.translatable("placeholderitem.empty").withStyle(ChatFormatting.RED));
+                                empty.set(DataComponents.LORE, itemlore);
+                                container.setItem(i, empty.copy());
+                            }
+                            else{
+                                container.setItem(i, inventory.getItem(40).copy());
+                            }
                         }
                         if(i == 44){
                             container.setItem(i, playerHead.copy());

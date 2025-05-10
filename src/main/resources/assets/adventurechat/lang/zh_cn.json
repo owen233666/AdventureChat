@@ -3,5 +3,9 @@
   "text.adventurechat.togglebutton.off": "AdventureAPI解析已关闭",
   "title.playersinv": "的背包",
   "title.playersitem": "的物品",
-  "command.fail.onlyplayer": "只有玩家才能执行此命令！"
+  "command.fail.onlyplayer": "只有玩家才能执行此命令！",
+  "hover.show.backpack": "的背包",
+  "hover.showinv.playersrmorslotisempty": "的盔甲槽是空的！",
+  "placeholderitem.empty": "空",
+  "placeholderitem.emptyoffhand": "的副手是空的！"
 }

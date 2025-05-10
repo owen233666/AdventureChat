@@ -3,5 +3,9 @@
   "text.adventurechat.togglebutton.off": "AdventureAPI OFF",
   "title.playersinv": "'s Inventory'",
   "title.playersitem": "'s Item",
-  "command.fail.onlyplayer": "Only player can execute this command!"
+  "command.fail.onlyplayer": "Only player can execute this command!",
+  "hover.show.backpack": "'s backpack",
+  "hover.showinv.playersrmorslotisempty": "'s armor slot is empty!",
+  "placeholderitem.empty": "Empty!",
+  "placeholderitem.emptyoffhand": "'s off hand is empty!"
 }

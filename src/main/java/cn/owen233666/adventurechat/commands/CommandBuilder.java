@@ -44,7 +44,7 @@ public class CommandBuilder {
                                 })
                         )
                 )
-                .then(Commands.literal("previewinv")
+                .then(Commands.literal("previewinventory")
                         .then(Commands.argument("uuid", StringArgumentType.greedyString())
                                 .executes(context -> {
                                     try {
