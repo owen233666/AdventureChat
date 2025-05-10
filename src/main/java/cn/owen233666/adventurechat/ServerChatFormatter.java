@@ -73,7 +73,7 @@ public class ServerChatFormatter {
 //            return message.replace("%i", "[空手]");
 //        }
 
-        String itemDisplay = "[<click:run_command:'/adventurechat previewitem "+ uuid +"'>" +heldItem.getItem().getDefaultInstance().getDisplayName()+ "<reset>]";
+        String itemDisplay = "[<click:run_command:'/adventurechat previewitem "+ uuid +"'>" +heldItem.getItem().getDefaultInstance().getHoverName()+ "<reset>]";
 
         return message.replace("%i", itemDisplay);
     }
