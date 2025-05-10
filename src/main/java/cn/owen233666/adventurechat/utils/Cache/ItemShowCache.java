@@ -9,7 +9,6 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 public class ItemShowCache {
-
     public static LoadingCache<UUID, ItemData> cache = CacheBuilder.newBuilder()
             .maximumSize(100)
             .build(new CacheLoader<UUID, ItemData>() {
