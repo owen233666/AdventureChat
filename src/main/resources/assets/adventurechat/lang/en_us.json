@@ -6,8 +6,10 @@
   "command.fail.onlyplayer": "Only player can execute this command!",
   "hover.show.backpack": "'s backpack",
   "hover.showinv.playersrmorslotisempty": "'s armor slot is empty!",
+  "hover.show.enderchest": "'s enderchest",
   "placeholderitem.empty": "Empty!",
   "placeholderitem.emptyoffhand": "'s off hand is empty!",
   "hover.text.sendtime": "Time: ",
-  "message.adventureapi.failedtoanalyze": "Error while anaylzing text!"
+  "message.adventureapi.failedtoanalyze": "Error while anaylzing text!",
+  "title.playersenderchest": "'s enderchest"
 }

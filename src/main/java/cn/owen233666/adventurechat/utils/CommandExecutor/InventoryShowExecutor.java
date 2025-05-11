@@ -120,7 +120,7 @@ public class InventoryShowExecutor {
                         }
 
                         @Override
-                        public ItemStack quickMoveStack(@NotNull Player player, int index) {
+                        public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
                             return ItemStack.EMPTY;
                         }
                     };

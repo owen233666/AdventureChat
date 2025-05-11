@@ -3,6 +3,7 @@ package cn.owen233666.adventurechat.commands;
 import cn.owen233666.adventurechat.AdventureChat;
 import cn.owen233666.adventurechat.Config;
 import cn.owen233666.adventurechat.client.ToggleButton;
+import cn.owen233666.adventurechat.utils.CommandExecutor.EnderChestShowExecutor;
 import cn.owen233666.adventurechat.utils.CommandExecutor.InventoryShowExecutor;
 import cn.owen233666.adventurechat.utils.CommandExecutor.ItemShowExecutor;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -57,21 +58,21 @@ public class CommandBuilder {
                                     }
                                 })
                         )
+                )
+                .then(Commands.literal("previewenderchest")
+                        .then(Commands.argument("uuid", StringArgumentType.greedyString())
+                                .executes(context -> {
+                                    try {
+                                        return EnderChestShowExecutor.execute(
+                                                context.getSource(),
+                                                StringArgumentType.getString(context, "uuid")
+                                                );
+                                        } catch (ExecutionException e) {
+                                            throw new RuntimeException(e);
+                                    }
+                                })
+                        )
                 );
-//                .then(Commands.literal("previewenderchest")
-//                        .then(Commands.argument("uuid", StringArgumentType.greedyString())
-//                                .executes(context -> {
-//                                    try {
-//                                        return InventoryShowExecutor.execute(
-//                                                context.getSource(),
-//                                                StringArgumentType.getString(context, "uuid")
-//                                                );
-//                                        } catch (ExecutionException e) {
-//                                            throw new RuntimeException(e);
-//                                    }
-//                                })
-//                        )
-//                );
     }
     private static void sendHelpMessage(CommandSourceStack source) {
         String helpMessage = Config.HELP_STRING.get();

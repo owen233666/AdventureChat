@@ -1,12 +1,12 @@
 package cn.owen233666.adventurechat.utils.DataType;
 
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.PlayerEnderChestContainer;
 
 public class EnderChestData {
     private Player player;
-    private Inventory enderChest;
-    public EnderChestData setEnderChest(Player player, Inventory enderChest) {
+    private PlayerEnderChestContainer enderChest;
+    public EnderChestData setEnderChest(Player player, PlayerEnderChestContainer enderChest) {
         this.player = player;
         this.enderChest = enderChest;
         return this;
@@ -16,7 +16,7 @@ public class EnderChestData {
         return player;
     }
 
-    public Inventory getEnderChest() {
+    public PlayerEnderChestContainer getEnderChest() {
         return enderChest;
     }
 }
