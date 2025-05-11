@@ -11,10 +11,10 @@ public class Networking {
     @SubscribeEvent
     public static void register(final RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar(VERSION);
-        registrar.playToServer(ClientAdvntrChatPacket.TYPE, ClientAdvntrChatPacket.STREAM_CODEC, ClientAdvntrChatPacket::handleOnServer);
+        registrar.playToServer(AdventureTogglePacket.TYPE, AdventureTogglePacket.STREAM_CODEC, AdventureTogglePacket::handleOnServer);
     }
 
-    public static void sendToServer(ClientAdvntrChatPacket packet) {
+    public static void sendToServer(AdventureTogglePacket packet) {
         Minecraft.getInstance().getConnection().send(packet);
     }
 }

@@ -9,12 +9,12 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
-public record ClientAdvntrChatPacket(Boolean isAdvntrapiOn) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<ClientAdvntrChatPacket> TYPE = new CustomPacketPayload.Type<>(AdventureChat.id("adventurechat_data"));
-    public static final StreamCodec<ByteBuf, ClientAdvntrChatPacket> STREAM_CODEC = StreamCodec.composite(
+public record AdventureTogglePacket(Boolean isAdvntrapiOn) implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<AdventureTogglePacket> TYPE = new CustomPacketPayload.Type<>(AdventureChat.id("adventurechat_data"));
+    public static final StreamCodec<ByteBuf, AdventureTogglePacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.BOOL,
-            ClientAdvntrChatPacket::isAdvntrapiOn,
-            ClientAdvntrChatPacket::new
+            AdventureTogglePacket::isAdvntrapiOn,
+            AdventureTogglePacket::new
     );
 
     @Override
@@ -26,7 +26,7 @@ public record ClientAdvntrChatPacket(Boolean isAdvntrapiOn) implements CustomPac
 //
 //    }
 
-    public static void handleOnServer(final ClientAdvntrChatPacket data, final IPayloadContext context) {
+    public static void handleOnServer(final AdventureTogglePacket data, final IPayloadContext context) {
         context.enqueueWork(() -> {
             // 更新 isAdvntrAPIOn 的值
             ServerChatFormatter.isAdvntrAPIOn = data.isAdvntrapiOn();
