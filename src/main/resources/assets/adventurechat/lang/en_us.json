@@ -11,5 +11,6 @@
   "placeholderitem.emptyoffhand": "'s off hand is empty!",
   "hover.text.sendtime": "Time: ",
   "message.adventureapi.failedtoanalyze": "Error while anaylzing text!",
-  "title.playersenderchest": "'s enderchest"
+  "title.playersenderchest": "'s enderchest",
+  "message.chat.ping": "<green>{player} ping you!<reset>"
 }

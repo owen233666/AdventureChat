@@ -40,6 +40,7 @@ public class ServerChatFormatter {
             tempMessage = processItemShow.processItemShow(player, tempMessage);
             tempMessage = processInventoryShow.processInvtoryShow(player, tempMessage);
             tempMessage = processEnderChestShow.processEnderChestShow(player, tempMessage);
+            tempMessage = Ping.processPingRequest(player, tempMessage);
             // 2. 解析消息内容
             Component messageContent;
             try {
