@@ -14,7 +14,7 @@ public class Networking {
         registrar.playToServer(AdventureTogglePacket.TYPE, AdventureTogglePacket.STREAM_CODEC, AdventureTogglePacket::handleOnServer);
     }
 
-    public static void sendToServer(AdventureTogglePacket packet) {
+    public static void sendAdventureToggleToServer(AdventureTogglePacket packet) {
         Minecraft.getInstance().getConnection().send(packet);
     }
 }

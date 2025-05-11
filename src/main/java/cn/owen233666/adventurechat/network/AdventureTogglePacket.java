@@ -10,7 +10,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
 public record AdventureTogglePacket(Boolean isAdvntrapiOn) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<AdventureTogglePacket> TYPE = new CustomPacketPayload.Type<>(AdventureChat.id("adventurechat_data"));
+    public static final CustomPacketPayload.Type<AdventureTogglePacket> TYPE = new CustomPacketPayload.Type<>(AdventureChat.id("toggle_adventure_button"));
     public static final StreamCodec<ByteBuf, AdventureTogglePacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.BOOL,
             AdventureTogglePacket::isAdvntrapiOn,

@@ -5,7 +5,6 @@ import cn.owen233666.adventurechat.commands.CommandRegister;
 import cn.owen233666.adventurechat.network.Networking;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
