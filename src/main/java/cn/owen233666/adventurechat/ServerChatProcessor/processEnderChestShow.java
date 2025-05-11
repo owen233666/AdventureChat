@@ -1,5 +1,6 @@
 package cn.owen233666.adventurechat.ServerChatProcessor;
 
+import cn.owen233666.adventurechat.utils.Cache.EnderChestShowCache;
 import cn.owen233666.adventurechat.utils.DataType.EnderChestData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
@@ -20,7 +21,7 @@ public class processEnderChestShow {
         PlayerEnderChestContainer enderchest = player.getEnderChestInventory();
         EnderChestData enderChestData = new EnderChestData().setEnderChest(player, enderchest);
         //写入缓存
-        enderChestData.setEnderChest(player, enderchest);
+        EnderChestShowCache.cache.put(uuid, enderChestData);
 
         String enderChestDisplay = "<light_purple>[<click:run_command:'/adventurechat previewenderchest " + uuid + "'>" + player.getScoreboardName() + "<lang:hover.show.enderchest>" + "]<reset>";
 

@@ -64,7 +64,7 @@ public class EnderChestShowExecutor {
                             container.setItem(i, playerHead.copy());
                         }
                     }
-                    return new ChestMenu(MenuType.GENERIC_9x5, containerId, playerInventory, container, 5) {
+                    return new ChestMenu(MenuType.GENERIC_9x4, containerId, playerInventory, container, 4) {
                         @Override
                         public @NotNull Slot addSlot(@NotNull Slot slot) {
                             // 替换所有容器槽为 LockedSlot（禁止交互）
