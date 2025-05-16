@@ -1,6 +1,7 @@
 package cn.owen233666.adventurechat.ServerChatProcessor;
 
 import cn.owen233666.adventurechat.AdventureChat;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.minecraft.ChatFormatting;
@@ -28,14 +29,14 @@ public class Ping {
                 if(sender == player){
                     return message;
                 }
-                net.kyori.adventure.text.Component translated = net.kyori.adventure.text.Component.translatable("message.chat.ping");
+//                net.kyori.adventure.text.Component translated = net.kyori.adventure.text.Component.translatable("message.chat.ping");
+                net.kyori.adventure.text.Component translated = MiniMessage.miniMessage().deserialize("<green>" + player.getScoreboardName() + Component.translatable("message.chat.ping"));
                 player.displayClientMessage(
                         convertToMinecraft(
                                 AdventureChat.MINI_MESSAGE
                                         .deserialize(PlainTextComponentSerializer
                                                 .plainText()
                                                 .serialize(translated)
-                                                .replace("{player}", player.getScoreboardName())
                                         ),
                                 player.registryAccess()),
                         true

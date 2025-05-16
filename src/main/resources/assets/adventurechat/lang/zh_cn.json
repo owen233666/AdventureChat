@@ -12,5 +12,5 @@
   "hover.text.sendtime": "发送时间：",
   "message.adventureapi.failedtoanalyze": "解析文字时发生错误！",
   "title.playersenderchest": "的末影箱",
-  "message.chat.ping": "\\u003cgreen\\u003e玩家{player}提到了你！\\u003creset\\u003e"
+  "message.chat.ping": "<green>提到了你！<reset>"
 }

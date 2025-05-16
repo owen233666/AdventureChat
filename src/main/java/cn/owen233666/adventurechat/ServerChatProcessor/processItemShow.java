@@ -20,7 +20,7 @@ public class processItemShow {
         //写入缓存
         ItemShowCache.cache.put(uuid, itemData);
 
-        String name = heldItem.getItem().getDefaultInstance().getHoverName().getString();
+        String name = heldItem.getItem().getDescriptionId();
 
         String itemDisplay = "[<click:run_command:'/adventurechat previewitem "+ uuid +"'>" +"<lang:" + name+ ">" + "<reset>]";
 
