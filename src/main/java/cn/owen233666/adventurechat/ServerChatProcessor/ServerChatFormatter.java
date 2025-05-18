@@ -5,7 +5,6 @@ import cn.owen233666.adventurechat.utils.convertutils;
 import cn.owen233666.adventurechat.utils.matchBilibiliVideos;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
