@@ -1,7 +1,7 @@
 package cn.owen233666.adventurechat;
 
 import cn.owen233666.adventurechat.ServerChatProcessor.ServerChatFormatter;
-import cn.owen233666.adventurechat.commands.CommandRegister;
+import cn.owen233666.adventurechat.Commands.CommandRegister;
 import cn.owen233666.adventurechat.network.Networking;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.minecraft.resources.ResourceLocation;
@@ -24,7 +24,6 @@ public class AdventureChat {
         NeoForge.EVENT_BUS.addListener(CommandRegister::onRegisterCommands);
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ServerChatFormatter::onServerChat);
     }
-
     public static ResourceLocation id(String path){
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }

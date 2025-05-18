@@ -1,7 +1,7 @@
 package cn.owen233666.adventurechat.ServerChatProcessor;
 
-import cn.owen233666.adventurechat.utils.Cache.EnderChestShowCache;
-import cn.owen233666.adventurechat.utils.DataType.EnderChestData;
+import cn.owen233666.adventurechat.Utils.Cache.EnderChestShowCache;
+import cn.owen233666.adventurechat.Utils.DataType.EnderChestData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.PlayerEnderChestContainer;
 

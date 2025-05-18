@@ -1,4 +1,4 @@
-package cn.owen233666.adventurechat.database;
+package cn.owen233666.adventurechat.Database;
 
 import cn.owen233666.adventurechat.AdventureChat;
 

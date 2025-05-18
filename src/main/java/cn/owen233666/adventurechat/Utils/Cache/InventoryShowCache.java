@@ -1,6 +1,6 @@
-package cn.owen233666.adventurechat.utils.Cache;
+package cn.owen233666.adventurechat.Utils.Cache;
 
-import cn.owen233666.adventurechat.utils.DataType.InventoryData;
+import cn.owen233666.adventurechat.Utils.DataType.InventoryData;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;

@@ -1,4 +1,4 @@
-package cn.owen233666.adventurechat.utils;
+package cn.owen233666.adventurechat.Utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

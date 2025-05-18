@@ -1,7 +1,7 @@
 package cn.owen233666.adventurechat.ServerChatProcessor;
 
-import cn.owen233666.adventurechat.utils.Cache.InventoryShowCache;
-import cn.owen233666.adventurechat.utils.DataType.InventoryData;
+import cn.owen233666.adventurechat.Utils.Cache.InventoryShowCache;
+import cn.owen233666.adventurechat.Utils.DataType.InventoryData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 
@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class processInventoryShow {
     public static String processInvtoryShow(ServerPlayer player, String message) {
         Pattern p1 = Pattern.compile("%inv");
-        Pattern p2 = Pattern.compile("\\[inv\\]");
+        Pattern p2 = Pattern.compile("\\[inv]");
         Matcher m1 = p1.matcher(message);
         Matcher m2 = p2.matcher(message);
         if (!m1.find() && !m2.find()) return message;

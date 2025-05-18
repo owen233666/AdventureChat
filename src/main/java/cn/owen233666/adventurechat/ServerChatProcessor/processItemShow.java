@@ -1,7 +1,7 @@
 package cn.owen233666.adventurechat.ServerChatProcessor;
 
-import cn.owen233666.adventurechat.utils.Cache.ItemShowCache;
-import cn.owen233666.adventurechat.utils.DataType.ItemData;
+import cn.owen233666.adventurechat.Utils.Cache.ItemShowCache;
+import cn.owen233666.adventurechat.Utils.DataType.ItemData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 

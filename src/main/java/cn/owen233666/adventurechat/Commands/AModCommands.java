@@ -1,4 +1,4 @@
-package cn.owen233666.adventurechat.commands;
+package cn.owen233666.adventurechat.Commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;

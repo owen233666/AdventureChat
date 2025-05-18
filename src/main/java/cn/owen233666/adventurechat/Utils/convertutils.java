@@ -1,4 +1,4 @@
-package cn.owen233666.adventurechat.utils;
+package cn.owen233666.adventurechat.Utils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,29 +39,7 @@ public class convertutils {
 
         if(Pattern.compile("<g:([^:>]+):([^>]+)>").matcher(input).find()){
             Pattern pattern = Pattern.compile("<g:([^:>]+):([^>]+)>");
-            Matcher matcher = pattern.matcher(input);
-            StringBuffer temp = new StringBuffer();
-            while (matcher.find()) {
-                matcher.appendReplacement(temp, "<gradient:" + matcher.group(1) + ":" + matcher.group(2) + ">");
-            }
-            String result = matcher.appendTail(temp).toString();
-            result = result.replace("&a","green");
-            result = result.replace("&b","aqua");
-            result = result.replace("&c","red");
-            result = result.replace("&d","light_purple");
-            result = result.replace("&e","gold");
-            result = result.replace("&f","white");
-            result = result.replace("&0","black");
-            result = result.replace("&1","dark_blue");
-            result = result.replace("&2","dark_green");
-            result = result.replace("&3","dark_aqua");
-            result = result.replace("&4","dark_red");
-            result = result.replace("&5","dark_purple");
-            result = result.replace("&6","yellow");
-            result = result.replace("&7","grey");
-            result = result.replace("&8","dark_grey");
-            result = result.replace("&9","blue");
-            result = result.replace("&r","<reset>");
+            String result = getString(input, pattern);
             return result;
         } else if (Pattern.compile("<gradient:([^:>]+):([^>]+)>").matcher(input).find()) {
             input = input.replace("&a","green");
@@ -108,5 +86,32 @@ public class convertutils {
             input = input.replace("&r","<reset>");
             return input;
         }
+    }
+
+    private static @NotNull String getString(@NotNull String input, Pattern pattern) {
+        Matcher matcher = pattern.matcher(input);
+        StringBuffer temp = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(temp, "<gradient:" + matcher.group(1) + ":" + matcher.group(2) + ">");
+        }
+        String result = matcher.appendTail(temp).toString();
+        result = result.replace("&a","green");
+        result = result.replace("&b","aqua");
+        result = result.replace("&c","red");
+        result = result.replace("&d","light_purple");
+        result = result.replace("&e","gold");
+        result = result.replace("&f","white");
+        result = result.replace("&0","black");
+        result = result.replace("&1","dark_blue");
+        result = result.replace("&2","dark_green");
+        result = result.replace("&3","dark_aqua");
+        result = result.replace("&4","dark_red");
+        result = result.replace("&5","dark_purple");
+        result = result.replace("&6","yellow");
+        result = result.replace("&7","grey");
+        result = result.replace("&8","dark_grey");
+        result = result.replace("&9","blue");
+        result = result.replace("&r","<reset>");
+        return result;
     }
 }

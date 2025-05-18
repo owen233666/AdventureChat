@@ -1,4 +1,4 @@
-package cn.owen233666.adventurechat.client;
+package cn.owen233666.adventurechat.Client;
 
 import cn.owen233666.adventurechat.AdventureChat;
 import cn.owen233666.adventurechat.network.AdventureTogglePacket;

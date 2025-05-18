@@ -1,8 +1,8 @@
-package cn.owen233666.adventurechat.utils.CommandExecutor;
+package cn.owen233666.adventurechat.Utils.CommandExecutor;
 
-import cn.owen233666.adventurechat.utils.Cache.InventoryShowCache;
-import cn.owen233666.adventurechat.utils.DataType.InventoryData;
-import cn.owen233666.adventurechat.utils.LockedSlot;
+import cn.owen233666.adventurechat.Utils.Cache.InventoryShowCache;
+import cn.owen233666.adventurechat.Utils.DataType.InventoryData;
+import cn.owen233666.adventurechat.Utils.LockedSlot;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.Command;
 import net.minecraft.ChatFormatting;

@@ -1,5 +1,5 @@
 // ScreenEventListener.java
-package cn.owen233666.adventurechat.client;
+package cn.owen233666.adventurechat.Client;
 
 import cn.owen233666.adventurechat.AdventureChat;
 import net.minecraft.client.gui.screens.ChatScreen;

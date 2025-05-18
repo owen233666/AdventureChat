@@ -1,4 +1,4 @@
-package cn.owen233666.adventurechat.utils;
+package cn.owen233666.adventurechat.Utils;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;

@@ -1,11 +1,11 @@
-package cn.owen233666.adventurechat.commands;
+package cn.owen233666.adventurechat.Commands;
 
 import cn.owen233666.adventurechat.AdventureChat;
 import cn.owen233666.adventurechat.Config;
-import cn.owen233666.adventurechat.client.ToggleButton;
-import cn.owen233666.adventurechat.utils.CommandExecutor.EnderChestShowExecutor;
-import cn.owen233666.adventurechat.utils.CommandExecutor.InventoryShowExecutor;
-import cn.owen233666.adventurechat.utils.CommandExecutor.ItemShowExecutor;
+import cn.owen233666.adventurechat.Client.ToggleButton;
+import cn.owen233666.adventurechat.Utils.CommandExecutor.EnderChestShowExecutor;
+import cn.owen233666.adventurechat.Utils.CommandExecutor.InventoryShowExecutor;
+import cn.owen233666.adventurechat.Utils.CommandExecutor.ItemShowExecutor;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
