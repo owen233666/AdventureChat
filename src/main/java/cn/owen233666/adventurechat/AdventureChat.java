@@ -1,7 +1,7 @@
 package cn.owen233666.adventurechat;
 
-import cn.owen233666.adventurechat.ServerChatProcessor.ServerChatFormatter;
-import cn.owen233666.adventurechat.Commands.CommandRegister;
+import cn.owen233666.adventurechat.serverchatprocessor.ServerChatFormatter;
+import cn.owen233666.adventurechat.commands.CommandRegister;
 import cn.owen233666.adventurechat.network.Networking;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.minecraft.resources.ResourceLocation;

@@ -1,7 +1,7 @@
 package cn.owen233666.adventurechat.network;
 
 import cn.owen233666.adventurechat.AdventureChat;
-import cn.owen233666.adventurechat.ServerChatProcessor.ServerChatFormatter;
+import cn.owen233666.adventurechat.serverchatprocessor.ServerChatFormatter;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
