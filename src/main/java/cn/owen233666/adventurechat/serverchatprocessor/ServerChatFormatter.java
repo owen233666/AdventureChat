@@ -37,7 +37,7 @@ public class ServerChatFormatter {
 
         if(isAdvntrAPIOn){
             String tempMessage = matchBilibiliVideos.bilibilimatcher(convertutils.convert(rawMessage));
-            tempMessage = processItemShow.processItemShow(player, tempMessage);
+            tempMessage = itemShowProcessor.processItemShow(player, tempMessage);
             tempMessage = processInventoryShow.processInvtoryShow(player, tempMessage);
             tempMessage = processEnderChestShow.processEnderChestShow(player, tempMessage);
             tempMessage = Ping.processPingRequest(player, tempMessage);
