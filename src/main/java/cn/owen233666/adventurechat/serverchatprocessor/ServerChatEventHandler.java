@@ -15,7 +15,7 @@ import net.neoforged.neoforge.event.ServerChatEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class ServerChatFormatter {
+public class ServerChatEventHandler {
     public static boolean isAdvntrAPIOn = true;
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onServerChat(ServerChatEvent event) {

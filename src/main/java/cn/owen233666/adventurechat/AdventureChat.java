@@ -1,6 +1,7 @@
 package cn.owen233666.adventurechat;
 
-import cn.owen233666.adventurechat.serverchatprocessor.ServerChatFormatter;
+import cn.owen233666.adventurechat.anvilprocessor.AnvilUpdateEventHandler;
+import cn.owen233666.adventurechat.serverchatprocessor.ServerChatEventHandler;
 import cn.owen233666.adventurechat.commands.CommandRegister;
 import cn.owen233666.adventurechat.network.Networking;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -11,6 +12,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
 
 @Mod(AdventureChat.MODID)
 public class AdventureChat {
@@ -22,7 +24,8 @@ public class AdventureChat {
         modEventBus.addListener(Config::onConfigChanged);
         modEventBus.addListener(Networking::register);
         NeoForge.EVENT_BUS.addListener(CommandRegister::onRegisterCommands);
-        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ServerChatFormatter::onServerChat);
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ServerChatEventHandler::onServerChat);
+        NeoForge.EVENT_BUS.addListener(AnvilUpdateEventHandler::onAnvilUpdate);
     }
     public static ResourceLocation id(String path){
         return ResourceLocation.fromNamespaceAndPath(MODID, path);

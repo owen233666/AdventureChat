@@ -1,7 +1,7 @@
 package cn.owen233666.adventurechat.network;
 
 import cn.owen233666.adventurechat.AdventureChat;
-import cn.owen233666.adventurechat.serverchatprocessor.ServerChatFormatter;
+import cn.owen233666.adventurechat.serverchatprocessor.ServerChatEventHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -29,7 +29,7 @@ public record AdventureTogglePacket(Boolean isAdvntrapiOn) implements CustomPack
     public static void handleOnServer(final AdventureTogglePacket data, final IPayloadContext context) {
         context.enqueueWork(() -> {
             // 更新 isAdvntrAPIOn 的值
-            ServerChatFormatter.isAdvntrAPIOn = data.isAdvntrapiOn();
+            ServerChatEventHandler.isAdvntrAPIOn = data.isAdvntrapiOn();
 
         });
     }
