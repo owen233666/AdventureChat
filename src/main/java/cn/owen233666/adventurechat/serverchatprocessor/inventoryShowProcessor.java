@@ -9,7 +9,7 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class processInventoryShow {
+public class inventoryShowProcessor {
     public static String processInvtoryShow(ServerPlayer player, String message) {
         Pattern p1 = Pattern.compile("%inv");
         Pattern p2 = Pattern.compile("\\[inv]");

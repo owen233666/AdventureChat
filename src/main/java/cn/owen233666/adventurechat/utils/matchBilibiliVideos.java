@@ -1,12 +1,14 @@
 package cn.owen233666.adventurechat.utils;
 
+import net.kyori.adventure.text.Component;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class matchBilibiliVideos {
     public static String bilibilimatcher(String input) {
         Pattern bilipattern = Pattern.compile("BV( )?.{10}");
-        Matcher bilimatcher = bilipattern.matcher(input);
+        Matcher bilimatcher = bilipattern.matcher(input.toString());
         StringBuffer sb = new StringBuffer();
         if (bilimatcher.find()) {// 将匹配到的内容替换为空
             String bv = bilimatcher.group(0);

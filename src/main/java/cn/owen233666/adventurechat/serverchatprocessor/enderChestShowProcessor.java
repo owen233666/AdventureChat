@@ -9,7 +9,7 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class processEnderChestShow {
+public class enderChestShowProcessor {
     public static String processEnderChestShow(ServerPlayer player, String message) {
         Pattern p1 = Pattern.compile("%end");
         Pattern p2 = Pattern.compile("\\[end\\]");

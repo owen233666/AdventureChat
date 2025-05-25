@@ -1,5 +1,6 @@
 package cn.owen233666.adventurechat.utils;
 
+import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Matcher;
@@ -39,8 +40,7 @@ public class convertutils {
 
         if(Pattern.compile("<g:([^:>]+):([^>]+)>").matcher(input).find()){
             Pattern pattern = Pattern.compile("<g:([^:>]+):([^>]+)>");
-            String result = getString(input, pattern);
-            return result;
+            return getString(input, pattern);
         } else if (Pattern.compile("<gradient:([^:>]+):([^>]+)>").matcher(input).find()) {
             input = input.replace("&a","green");
             input = input.replace("&b","aqua");

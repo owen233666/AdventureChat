@@ -4,6 +4,7 @@ import cn.owen233666.adventurechat.anvilprocessor.AnvilUpdateEventHandler;
 import cn.owen233666.adventurechat.serverchatprocessor.ServerChatEventHandler;
 import cn.owen233666.adventurechat.commands.CommandRegister;
 import cn.owen233666.adventurechat.network.Networking;
+import cn.owen233666.adventurechat.utils.serverAudienceInit;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.EventPriority;
@@ -21,6 +22,7 @@ public class AdventureChat {
     public AdventureChat(IEventBus modEventBus, ModContainer modContainer) {
         // 注册配置
         Config.register(ModLoadingContext.get().getActiveContainer());
+        serverAudienceInit.AudienceInit.register(modEventBus);
         modEventBus.addListener(Config::onConfigChanged);
         modEventBus.addListener(Networking::register);
         NeoForge.EVENT_BUS.addListener(CommandRegister::onRegisterCommands);
